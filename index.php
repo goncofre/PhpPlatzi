@@ -3,20 +3,62 @@ $name = 'Hector Benitez';
 $jobs = [
       [
         'title' => 'PHP Developer',
-        'descripcion' => 'Texto de prueba'
+        'descripcion' => 'Texto de prueba',
+        'visible' => true,
+        'months' => 6
       ],
       [
         'title' => 'Python Dev',
+        'visible' => false,
+        'months' => 6
       ],
       [
         'title' => 'Devops',
+        'visible' => false,
+        'months' => 4
       ]
+      [
+        'title' => 'Node Dev',
+        'visible' => true,
+        'months' => 6
+      ],
+      [
+        [
+        'title' => 'Frontend Dev',
+        'visible' => true,
+        'months' => 4
+      ],
+      [
 ];
 
-$var1=5;
-if($var1 > 2){
-  echo 'es mayor que 2';
+function getDuration($months) {
+  $years = floor($months / 12);
+  $extraMonths = $months % 12;
+
+  return "$years years $extraMonths months";
 }
+
+function printJob($job)
+{
+  if($job['visible'] == false)
+  {
+    return;
+  }
+  echo '<li class="work-position">';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+  echo '';
+}
+
+printJob();
 ?>
 
 <!doctype html>
@@ -66,6 +108,15 @@ if($var1 > 2){
         <div>
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
+          <?php
+            $totalMonths;
+            for ($idx=0; $idx < count($jobs) ; $i++) { 
+              $totalMonths += $jobs[$idx]['months'];
+            }
+
+            printJob();
+          ?>
+
             <li class="work-position">
               <h5><?php echo $jobs[0]['title']?></h5>
               <p><?php echo $jobs[0]['descripcion']?></p>
