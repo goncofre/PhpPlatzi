@@ -1,64 +1,9 @@
 <?php
-$name = 'Hector Benitez';
-$jobs = [
-      [
-        'title' => 'PHP Developer',
-        'descripcion' => 'Texto de prueba',
-        'visible' => true,
-        'months' => 6
-      ],
-      [
-        'title' => 'Python Dev',
-        'visible' => false,
-        'months' => 6
-      ],
-      [
-        'title' => 'Devops',
-        'visible' => false,
-        'months' => 4
-      ]
-      [
-        'title' => 'Node Dev',
-        'visible' => true,
-        'months' => 6
-      ],
-      [
-        [
-        'title' => 'Frontend Dev',
-        'visible' => true,
-        'months' => 4
-      ],
-      [
-];
+require_once('jobs.php');
 
-function getDuration($months) {
-  $years = floor($months / 12);
-  $extraMonths = $months % 12;
+$name = 'Gonzalo Cofré Vera';
+$limitMonths = 2000;
 
-  return "$years years $extraMonths months";
-}
-
-function printJob($job)
-{
-  if($job['visible'] == false)
-  {
-    return;
-  }
-  echo '<li class="work-position">';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-  echo '';
-}
-
-printJob();
 ?>
 
 <!doctype html>
@@ -108,45 +53,18 @@ printJob();
         <div>
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
-          <?php
-            $totalMonths;
-            for ($idx=0; $idx < count($jobs) ; $i++) { 
-              $totalMonths += $jobs[$idx]['months'];
+            <?php
+            $totalMonths = 0;
+            for($idx = 0;$idx < count($jobs); $idx++) {
+              // $totalMonths = $totalMonths + $jobs[$idx]['months'];
+              $totalMonths += $jobs[$idx]->months;
+              if($totalMonths > $limitMonths) {
+                break;
+              }
+
+              printJob($jobs[$idx]);
             }
-
-            printJob();
-          ?>
-
-            <li class="work-position">
-              <h5><?php echo $jobs[0]['title']?></h5>
-              <p><?php echo $jobs[0]['descripcion']?></p>
-              <strong>Achievements:</strong>
-              <ul>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-              </ul>
-            </li>
-            <li class="work-position">
-                <h5><?php echo $jobs[1]['title']?></h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                <strong>Achievements:</strong>
-                <ul>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                </ul>
-              </li>
-              <li class="work-position">
-                  <h5><?php echo $jobs[2]['title']?></h5>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                  <strong>Achievements:</strong>
-                  <ul>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  </ul>
-                </li>
+            ?>
           </ul>
         </div>
         <div>
