@@ -1,35 +1,8 @@
 <?php
 
-class Job {
-    private $title;
-    public $description;
-    public $visible = true;
-    public $months;
-
-    public function __construct($title, $description) {
-        $this->setTitle($title);
-        $this->description = $description;
-    }
-
-    public function setTitle($t) {
-        if($t == '') {
-            $this->title = 'N/A';
-        } else {
-            $this->title = $t;
-        }
-    }
-
-    public function getTitle() {
-        return $this->title;
-    }
-
-    public function getDurationAsString() {
-        $years = floor($this->months / 12);
-        $extraMonths = $this->months % 12;
-      
-        return "$years years $extraMonths months";
-    }
-}
+require 'app/Models/Jobs.php';
+require 'app/Models/Project.php';
+require_once 'app/Models/Printable.php';
 
 $job1 = new Job('PHP Developer', 'This is an awesome job!!!');
 $job1->months = 16;
@@ -40,46 +13,26 @@ $job2->months = 24;
 $job3 = new Job('Devops', 'This is an awesome job!!!');
 $job3->months = 32;
 
+$project1 = new Project('Project 1', 'Description 1');
+
 $jobs = [
     $job1,
     $job2,
     $job3
-    // [
-    //   '' => ,
-    //   'description' => ,
-    //   'visible' => true,
-    //   'months' => 16
-    // ],
-    // [
-    //   'title' => 'Python Dev',
-    //   'visible' => false,
-    //   'months' => 14
-    // ],
-    // [
-    //   'title' => 'Devops',
-    //   'visible' => true,
-    //   'months' => 5
-    // ],
-    // [
-    //   'title' => 'Node Dev',
-    //   'visible' => true,
-    //   'months' => 24
-    // ],
-    // [
-    //   'title' => 'Frontend Dev',
-    //   'visible' => true,
-    //   'months' => 3
-    // ]
   ];
+
+$projects = [
+    $project1
+];
   
-  function printJob($job) {
+function printElement(Printable $job) {
     if($job->visible == false) {
       return;
     }
   
     echo '<li class="work-position">';
     echo '<h5>' . $job->getTitle() . '</h5>';
-    echo '<p>' . $job->description . '</p>';
+    echo '<p>' . $job->getDescription() . '</p>';
     echo '<p>' . $job->getDurationAsString() . '</p>';
     echo '<strong>Achievements:</strong>';
     echo '<ul>';
